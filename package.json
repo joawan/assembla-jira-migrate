@@ -1,0 +1,25 @@
+{
+  "name": "assembla-jira-migrate",
+  "version": "0.1.0",
+  "description": "App to get assembla tickets, and output for JIRA import",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:joawan/assembla-jira-migrate.git"
+  },
+  "main": "app.js",
+  "author": "Joakim Wånggren <joakim.wanggren@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/jshint ./*.js"
+  },
+  "dependencies": {
+    "event-stream": "^3.1.7",
+    "request": "^2.44.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.6"
+  }
+}

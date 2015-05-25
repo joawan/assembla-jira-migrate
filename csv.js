@@ -22,21 +22,20 @@ function csvEscape(val) {
 }
 
 function timeFormat(val) {
-  return val.slice(0,19).replace('T', ' ') // yyyy-MM-dd HH:mm:ss
+  return val.slice(0,19).replace('T', ' '); // yyyy-MM-dd HH:mm:ss
 }
 
 function guessType(summary) {
-  if (summary.slice(0,3).toLowerCase() == 'bug') {
-    return "Bug";
+  if (summary.slice(0,3).toLowerCase() === 'bug') {
+    return 'Bug';
   }
-  if (summary.slice(0,3).toLowerCase() == 'as ') {
-    return "Story";
+  if (summary.slice(0,3).toLowerCase() === 'as ') {
+    return 'Story';
   }
-  if (summary.slice(0,4).toLowerCase() == 'task') {
-    return "Task";
+  if (summary.slice(0,4).toLowerCase() === 'task') {
+    return 'Task';
   }
-
-  return "Incoming";
+  return 'Incoming';
 }
 
 process.stdin
@@ -64,7 +63,7 @@ process.stdin
         guessType(ticket.summary),
         ticket.priority,
         timeFormat(ticket.created_on)
-      ]
+      ];
       out = '"' + out.join('","') + '"';
       return cb(null, out);
     });

@@ -15,27 +15,26 @@ var baseRequest = request.defaults({
 
 function reporterToUser(id) {
   if (!config.users[id]) {
-    console.warn(id + ' no found!');
+    console.warn('User with assembla id ' + id + ' was not found in mapping. Populate config.js');
   }
   return config.users[id] || '';
 }
 
 function timeFormat(val) {
-  return val.replace('Z', '+0100') // yyyy-MM-dd'T'HH:mm:ss.SSS+0100
+  return val.replace('Z', '+0100'); // yyyy-MM-dd'T'HH:mm:ss.SSS+0100
 }
 
 function guessType(summary) {
-  if (summary.slice(0,3).toLowerCase() == 'bug') {
-    return "Bug";
+  if (summary.slice(0,3).toLowerCase() === 'bug') {
+    return 'Bug';
   }
-  if (summary.slice(0,3).toLowerCase() == 'as ') {
-    return "Story";
+  if (summary.slice(0,3).toLowerCase() === 'as ') {
+    return 'Story';
   }
-  if (summary.slice(0,4).toLowerCase() == 'task') {
-    return "Task";
+  if (summary.slice(0,4).toLowerCase() === 'task') {
+    return 'Task';
   }
-
-  return "Incoming";
+  return 'Incoming';
 }
 
 function priority(prio) {
@@ -85,7 +84,6 @@ process.stdin
     });
   }))
   .pipe(es.map(function(ticket, cb) {
-    console.log(ticket);
     var jira = {
       'externalId': ticket.number,
       'summary': ticket.summary,
@@ -105,7 +103,7 @@ process.stdin
       };
     }).filter(function(comment) {
       return comment.body !== "--- []\n";
-    });;
+    });
 
     return cb(null, JSON.stringify(jira));
   }))
